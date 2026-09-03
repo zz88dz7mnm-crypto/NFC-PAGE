@@ -11,7 +11,8 @@ Sitio estático, sin build. Se despliega tal cual en Vercel.
 index.html      Página completa
 styles.css      Sistema de diseño y estilos
 app.js          Reveals, demo del toque y links de contacto
-assets/         Fotos optimizadas (WebP + JPG) e imagen social
+assets/         Fotos optimizadas (WebP + JPG), imagen social y fuentes
+fonts.css       Declaraciones @font-face de las fuentes auto-hospedadas
 favicon.svg
 robots.txt · sitemap.xml
 ```
@@ -51,6 +52,12 @@ npx serve -l 4321 .
 - **Los cuatro colores de Google se reservan al producto.** En la interfaz el
   único acento es el oro de las cinco estrellas. Evita que la página se lea como
   una imitación de Google y mantiene la atención en la placa.
+- **Fuentes auto-hospedadas.** Fraunces e Inter viven en `assets/fonts`,
+  subseteadas a los caracteres que usa la página. La hoja de estilos de Google
+  Fonts bloqueaba el primer render: si ese pedido se demoraba o fallaba, la
+  página quedaba en blanco. Medido en local, el primer render pasó de 12,6 s a
+  0,19 s. Si algún día agregás texto con caracteres nuevos (otro idioma, símbolos
+  raros), hay que regenerar el subset o esos glifos caen a la fuente del sistema.
 - **Animación con propósito.** El único movimiento grande es la demo del toque,
   que explica el producto. Corre sólo cuando está en pantalla y la pestaña está
   visible. Todo se anima con `transform` y `opacity`, y `prefers-reduced-motion`
