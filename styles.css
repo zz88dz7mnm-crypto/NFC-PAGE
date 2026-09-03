@@ -670,7 +670,7 @@ a { color: inherit; }
   transition: transform 620ms var(--ease-drawer);
   z-index: 2;
   color: oklch(0.25 0.008 72);
-  font-size: clamp(0.44rem, 1.55vw, 0.68rem);
+  font-size: clamp(0.5rem, 1.7vw, 0.72rem);
   line-height: 1.35;
 }
 .stage[data-step="1"] .sheet,
@@ -1090,3 +1090,22 @@ a { color: inherit; }
 .plaque__stars svg { width: 100%; height: auto; color: var(--g-yellow); }
 .plaque__nfc { position: absolute; bottom: 16%; color: oklch(0.35 0.01 72); }
 .plaque__nfc svg { display: block; }
+
+/* ── Targets táctiles ─────────────────────────────────────
+   Los enlaces de texto quedaban en 22-26 px de alto. Se les da
+   caja hasta 44 px sin mover la composición.                */
+.btn--sm { min-height: 44px; }
+.brand {
+  padding-block: 0.5rem;
+  min-height: 44px;
+}
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.nav__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
