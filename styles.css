@@ -872,17 +872,46 @@ a { color: inherit; }
 .sizes__cap b { font-weight: 600; }
 .sizes__cap span { color: var(--muted); }
 
-/* Cota que se dibuja al entrar en pantalla */
-.dim { display: block; width: 100%; height: auto; margin-top: 1.5rem; color: var(--line); }
-.dim .draw {
-  stroke-dasharray: var(--len, 400);
-  stroke-dashoffset: var(--len, 400);
-  transition: stroke-dashoffset 1100ms var(--ease-in-out) 120ms;
+/* Cota: las líneas se dibujan al entrar en pantalla */
+.dim {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
 }
-.dim.is-in .draw { stroke-dashoffset: 0; }
-.dim text { fill: var(--gold); font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; }
+.dim b {
+  flex: none;
+  color: var(--gold);
+  font-size: clamp(0.875rem, 0.8rem + 0.4vw, 1.0625rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.dim__line {
+  position: relative;
+  flex: 1 1 0;
+  height: 1px;
+  background: var(--line);
+  transform: scaleX(0);
+  transition: transform 900ms var(--ease-in-out) 120ms;
+}
+.dim__line:first-child { transform-origin: right center; }
+.dim__line:last-child { transform-origin: left center; }
+.dim.is-in .dim__line { transform: scaleX(1); }
+/* Topes de la cota */
+.dim__line::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 1px;
+  height: 11px;
+  background: var(--line);
+}
+.dim__line:first-child::after { left: 0; }
+.dim__line:last-child::after { right: 0; }
+
 @media (prefers-reduced-motion: reduce) {
-  .dim .draw { stroke-dashoffset: 0; transition: none; }
+  .dim__line { transform: scaleX(1); transition: none; }
   .split__media img { transform: none; transition: none; }
 }
 
