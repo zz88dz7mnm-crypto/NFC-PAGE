@@ -1,19 +1,111 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NFC</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: #ff0000;
-  }
-  body { min-height: 100vh; }
-</style>
+<title>Placa NFC para Reseñas de Google · Reseñas en un toque</title>
+<meta name="description" content="Placa resinada con chip NFC: el cliente acerca el celular y se abre directo tu página de reseñas de Google. Sin apps, sin batería, sin wifi. Personalizable para tu negocio.">
+<meta name="theme-color" content="#141210">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/assets/placa-hero.webp" imagesrcset="/assets/placa-hero-sm.webp 640w, /assets/placa-hero.webp 1100w" imagesizes="(min-width: 940px) 520px, 92vw">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body></body>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#main">
+      <svg class="brand__mark" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="7" stroke="currentColor" stroke-opacity="0.28" stroke-width="1.5"/>
+        <path d="M9 9.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M12.4 7a8.4 8.4 0 0 1 0 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.62"/>
+        <path d="M15.8 4.6a11.6 11.6 0 0 1 0 16.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.32"/>
+      </svg>
+      <span>Placa&nbsp;NFC <span style="color:var(--faint);font-weight:500">· Reseñas</span></span>
+    </a>
+    <div class="nav__right">
+      <nav class="nav__links" aria-label="Secciones">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#tamano">Tamaño real</a>
+        <a href="#beneficios">Beneficios</a>
+      </nav>
+      <a class="btn btn--sm" href="#contacto">Quiero la mía</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="wrap hero__inner">
+
+      <div class="hero__copy">
+        <span class="eyebrow">
+          <span class="eyebrow__dot" aria-hidden="true"></span>
+          Placa resinada · Chip NFC integrado
+        </span>
+
+        <h1>Reseñas de Google,<br><span class="accent">en un toque.</span></h1>
+
+        <p class="hero__lead">
+          El cliente apoya el celular sobre la placa y se le abre directo tu página
+          de reseñas. Nada de buscar el negocio a mano, escanear códigos raros ni
+          escribir la dirección.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--lg" href="#contacto">Quiero la mía</a>
+          <a class="btn btn--ghost btn--lg" href="#como-funciona">Ver cómo funciona</a>
+        </div>
+
+        <ul class="hero__facts">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Sin apps
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Sin batería ni wifi
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Se configura una sola vez
+          </li>
+        </ul>
+      </div>
+
+      <div class="showcase" id="showcase">
+        <div class="showcase__stage" id="stage">
+          <picture>
+            <source type="image/webp" srcset="/assets/placa-hero-sm.webp 640w, /assets/placa-hero.webp 1100w" sizes="(min-width: 940px) 520px, 92vw">
+            <img src="/assets/placa-hero.jpg"
+                 srcset="/assets/placa-hero-sm.jpg 640w, /assets/placa-hero.jpg 1100w"
+                 sizes="(min-width: 940px) 520px, 92vw"
+                 width="1100" height="1100" fetchpriority="high"
+                 alt="Placa cuadrada blanca con acabado resinado brillante, borde en los cuatro colores de Google, el texto «Dejanos tu reseña», cinco estrellas doradas y el símbolo NFC.">
+          </picture>
+          <div class="showcase__ripples" aria-hidden="true">
+            <span class="ripple"></span><span class="ripple"></span><span class="ripple"></span>
+          </div>
+          <div class="showcase__gloss" aria-hidden="true"></div>
+        </div>
+        <div class="showcase__tag" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5.6 5.9a3 3 0 0 1 0 4.2M8 3.9a5.8 5.8 0 0 1 0 8.2M10.4 2a8.6 8.6 0 0 1 0 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Acercá tu celular
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="/app.js" defer></script>
+</body>
 </html>
