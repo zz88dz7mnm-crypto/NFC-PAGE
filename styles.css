@@ -499,8 +499,8 @@ a { color: inherit; }
 
 .stage {
   position: relative;
-  aspect-ratio: 4 / 5;
-  max-width: 380px;
+  aspect-ratio: 3 / 4;
+  max-width: 400px;
   width: 100%;
   justify-self: center;
   border-radius: 24px;
@@ -516,26 +516,36 @@ a { color: inherit; }
 .plaque {
   position: absolute;
   left: 50%;
-  bottom: 11%;
-  width: 47%;
+  bottom: 7%;
+  width: 41%;
   aspect-ratio: 1;
   transform: translateX(-50%);
   border-radius: 16%;
   background: linear-gradient(160deg, oklch(0.995 0.002 80), oklch(0.93 0.006 80));
   box-shadow: 0 18px 34px -14px oklch(0.05 0 0 / 0.8), 0 0 0 1px oklch(1 0 0 / 0.08);
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7%;
 }
 .plaque__frame {
   position: absolute;
   inset: 9%;
   border-radius: 12%;
-  background:
-    linear-gradient(to right, var(--g-blue) 0 50%, var(--g-red) 50% 100%) top / 100% 2px no-repeat,
-    linear-gradient(to right, var(--g-green) 0 50%, var(--g-yellow) 50% 100%) bottom / 100% 2px no-repeat,
-    linear-gradient(to bottom, var(--g-blue) 0 50%, var(--g-green) 50% 100%) left / 2px 100% no-repeat,
-    linear-gradient(to bottom, var(--g-red) 0 50%, var(--g-yellow) 50% 100%) right / 2px 100% no-repeat;
-  opacity: 0.9;
+  padding: 2.5px;
+  background: conic-gradient(
+    from 135deg,
+    var(--g-blue) 0 25%,
+    var(--g-red) 25% 50%,
+    var(--g-yellow) 50% 75%,
+    var(--g-green) 75% 100%
+  );
+  /* Anillo limpio: la máscara vacía el interior y deja sólo el borde */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0.92;
 }
 .plaque__g {
   width: 34%;
@@ -550,15 +560,15 @@ a { color: inherit; }
   );
   mask: radial-gradient(circle, transparent 0 42%, #000 44%);
   -webkit-mask: radial-gradient(circle, transparent 0 42%, #000 44%);
-  transform: translateY(-6%);
+  transform: translateY(-8%);
 }
 
 /* Ondas que salen de la placa cuando hay contacto */
 .contact {
   position: absolute;
   left: 50%;
-  bottom: 30%;
-  width: 34%;
+  bottom: 24%;
+  width: 30%;
   aspect-ratio: 1;
   transform: translate(-50%, 50%);
   pointer-events: none;
@@ -584,8 +594,8 @@ a { color: inherit; }
 .phone {
   position: absolute;
   left: 50%;
-  top: 6%;
-  width: 52%;
+  top: 2%;
+  width: 41%;
   aspect-ratio: 1 / 2;
   border-radius: 13% / 6.5%;
   background: oklch(0.24 0.008 72);
@@ -597,9 +607,9 @@ a { color: inherit; }
   transition: transform 900ms var(--ease-in-out);
   will-change: transform;
 }
-.stage[data-step="0"] .phone { --phone-y: 0; --phone-r: -3deg; }
-.stage[data-step="1"] .phone { --phone-y: 30%; --phone-r: 0deg; }
-.stage[data-step="2"] .phone { --phone-y: 12%; --phone-r: 0deg; }
+.stage[data-step="0"] .phone { --phone-y: -2%; --phone-r: -3.5deg; }
+.stage[data-step="1"] .phone { --phone-y: 21%; --phone-r: 0deg; }
+.stage[data-step="2"] .phone { --phone-y: 6%; --phone-r: 0deg; }
 
 .phone__screen {
   position: relative;
@@ -607,6 +617,7 @@ a { color: inherit; }
   border-radius: 9% / 4.6%;
   background: oklch(0.985 0.002 80);
   overflow: hidden;
+  transition: background-color 420ms ease;
   display: flex;
   flex-direction: column;
 }
@@ -625,12 +636,15 @@ a { color: inherit; }
   position: absolute;
   inset: 0;
   display: grid;
-  place-content: center;
-  gap: 0.5rem;
+  align-content: start;
   justify-items: center;
+  gap: 0.4rem;
+  padding-top: 22%;
   color: oklch(0.55 0.01 72);
-  transition: opacity 320ms ease;
+  transition: opacity 300ms ease;
 }
+.stage[data-step="1"] .phone__idle,
+.stage[data-step="2"] .phone__idle { opacity: 0; }
 .phone__idle svg { color: oklch(0.62 0.01 72); }
 .phone__time {
   font-family: var(--font-sans);
@@ -646,8 +660,9 @@ a { color: inherit; }
   inset: auto 0 0 0;
   background: #fff;
   border-radius: 6% 6% 0 0 / 3% 3% 0 0;
-  box-shadow: 0 -8px 24px -10px oklch(0.05 0 0 / 0.25);
-  padding: 8% 8% 9%;
+  border-top: 1px solid oklch(0.90 0.004 80);
+  box-shadow: 0 -14px 30px -8px oklch(0.05 0 0 / 0.35);
+  padding: 7% 8% 8%;
   transform: translateY(101%);
   transition: transform 620ms var(--ease-drawer);
   z-index: 2;
@@ -657,6 +672,18 @@ a { color: inherit; }
 }
 .stage[data-step="1"] .sheet,
 .stage[data-step="2"] .sheet { transform: translateY(0); }
+
+/* La pantalla se oscurece detrás de la hoja, como un bottom sheet real */
+.stage[data-step="1"] .phone__screen,
+.stage[data-step="2"] .phone__screen { background: oklch(0.80 0.006 80); }
+
+.sheet__grab {
+  width: 20%;
+  height: 3.5px;
+  border-radius: 999px;
+  background: oklch(0.86 0.004 80);
+  margin: -2% auto 7%;
+}
 
 .sheet__biz { display: flex; align-items: center; gap: 6%; }
 .sheet__avatar {
@@ -808,8 +835,8 @@ a { color: inherit; }
   gap: 1.25rem;
 }
 @media (min-width: 760px) {
-  .sizes { grid-template-columns: 1.35fr 1fr; grid-template-rows: auto auto; }
-  .sizes__item:first-child { grid-row: span 2; }
+  .sizes { grid-template-columns: 1.2fr 1fr; align-items: stretch; }
+  .sizes__item:first-child { grid-row: span 2; aspect-ratio: auto; }
 }
 .sizes__item {
   position: relative;
@@ -821,11 +848,11 @@ a { color: inherit; }
 .sizes__item img {
   width: 100%;
   height: 100%;
-  min-height: 220px;
   object-fit: cover;
-  object-position: center 42%;
+  object-position: center 45%;
 }
-.sizes__item:first-child img { min-height: 340px; }
+.sizes__item { aspect-ratio: 16 / 11; }
+.sizes__item:first-child { aspect-ratio: 4 / 5; }
 .sizes__cap {
   position: absolute;
   left: 0.875rem;
@@ -1004,3 +1031,26 @@ a { color: inherit; }
 }
 .footer a { text-decoration: none; transition: color 160ms ease; }
 .footer a:hover { color: var(--paper); }
+
+/* Sombra de contacto: ancla la placa a una superficie */
+.plaque::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -13%;
+  width: 118%;
+  height: 16%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, oklch(0.03 0 0 / 0.55), transparent 70%);
+  filter: blur(3px);
+}
+.plaque { z-index: 2; }
+.contact { z-index: 3; }
+.phone { z-index: 1; }
+
+/* Detalle de la placa a escala chica: la G, las estrellas y el glifo NFC */
+.plaque__stars { display: flex; gap: 6%; width: 44%; transform: translateY(-8%); }
+.plaque__stars svg { width: 100%; height: auto; color: var(--g-yellow); }
+.plaque__nfc { position: absolute; bottom: 16%; color: oklch(0.35 0.01 72); }
+.plaque__nfc svg { display: block; }
