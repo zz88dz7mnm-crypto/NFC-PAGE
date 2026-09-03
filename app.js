@@ -114,12 +114,7 @@
       timer = setTimeout(advance, DURATIONS[step]);
     }
 
-    function play() {
-      if (timer === null || !visible) return;
-      schedule();
-    }
-
-    function stop() { clearTimeout(timer); }
+    function stop() { clearTimeout(timer); timer = null; }
 
     if (reduced.matches) {
       // Sin movimiento: mostramos el estado final, que es el que explica el producto.
@@ -137,6 +132,8 @@
       });
     }
   }
+
+  window.__nfcReady = true;
 
   /* ── Cotas que se dibujan al entrar ─────────────────────── */
   var dims = document.querySelectorAll(".dim");
