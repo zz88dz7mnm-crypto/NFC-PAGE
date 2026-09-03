@@ -21,7 +21,13 @@ robots.txt · sitemap.xml
 
 Hay tres cosas que dependen de datos reales y quedaron con valores de referencia:
 
-1. **Contacto.** En `app.js`, arriba de todo, está el objeto `CONTACTO`:
+1. **Contacto — hay que tocarlo en DOS lugares.** Los `href` reales viven en
+   `index.html` para que los botones funcionen aunque el JS no cargue, y `app.js`
+   los reescribe en runtime. Si cambiás uno solo, el otro queda desactualizado.
+
+   En `index.html`, buscá `wa.me` y `mailto:` (sección `#contacto`).
+
+   En `app.js`, arriba de todo:
 
    ```js
    var CONTACTO = {
@@ -58,6 +64,8 @@ npx serve -l 4321 .
   página quedaba en blanco. Medido en local, el primer render pasó de 12,6 s a
   0,19 s. Si algún día agregás texto con caracteres nuevos (otro idioma, símbolos
   raros), hay que regenerar el subset o esos glifos caen a la fuente del sistema.
+  El subset `latin` de Google no incluye `≈` (U+2248), por eso la cota de tamaño
+  dice "aprox." en texto y no el símbolo.
 - **Animación con propósito.** El único movimiento grande es la demo del toque,
   que explica el producto. Corre sólo cuando está en pantalla y la pestaña está
   visible. Todo se anima con `transform` y `opacity`, y `prefers-reduced-motion`

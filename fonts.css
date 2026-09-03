@@ -15,17 +15,12 @@
   font-display: swap;
   src: url('/assets/fonts/fraunces-italic-400_700-latin.woff2') format('woff2');
 }
+/* Inter es variable (eje wght 100-900): un solo archivo cubre todos los
+   pesos. Declararlo por peso bajaba el mismo binario dos veces. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   font-display: swap;
   src: url('/assets/fonts/inter-normal-400-latin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/assets/fonts/inter-normal-600-latin.woff2') format('woff2');
 }

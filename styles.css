@@ -425,6 +425,8 @@ a { color: inherit; }
 .hero__inner { gap: 0; }
 .hero__inner > .hero__copy > * + *,
 .hero__inner > .showcase { margin-top: 1.5rem; }
+.hero__inner > .hero__copy > .hero__actions { margin-top: 2.25rem; }
+.hero__inner > .hero__copy > .hero__facts { margin-top: 2.5rem; }
 
 @media (max-width: 559px) {
   .hero__actions { display: grid; grid-template-columns: 1fr; }
@@ -440,7 +442,7 @@ a { color: inherit; }
 /* ============================================================
    Secciones
    ============================================================ */
-.section { padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
+.section { scroll-margin-top: 5rem; padding-block: clamp(4.5rem, 9vw, 8rem); position: relative; }
 .section--tight { padding-block: clamp(3.5rem, 7vw, 6rem); }
 .section--raised { background: var(--ink-850); }
 
@@ -672,7 +674,7 @@ a { color: inherit; }
   transition: transform 620ms var(--ease-drawer);
   z-index: 2;
   color: oklch(0.25 0.008 72);
-  font-size: clamp(0.5rem, 1.7vw, 0.72rem);
+  font-size: clamp(0.6875rem, 2.1vw, 0.75rem);
   line-height: 1.35;
 }
 .stage[data-step="1"] .sheet,
@@ -740,11 +742,8 @@ a { color: inherit; }
   gap: 1.125rem;
   padding-block: 1.375rem;
   border-top: 1px solid var(--line-soft);
-  opacity: 0.42;
-  transition: opacity 380ms ease;
 }
 .steps li:last-child { border-bottom: 1px solid var(--line-soft); }
-.steps li[data-active="true"] { opacity: 1; }
 .steps__num {
   position: relative;
   width: 2.375rem;
@@ -765,8 +764,25 @@ a { color: inherit; }
   border-color: var(--gold);
   color: oklch(0.20 0.04 72);
 }
-.steps h3 { font-size: 1.25rem; font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.015em; }
-.steps p { margin-top: 0.375rem; color: var(--muted); font-size: 0.9375rem; }
+/* El paso inactivo se marca con color, no con opacity: bajarle la
+   opacidad al bloque dejaba el texto en 2,43:1, y bajo reduced-motion
+   la demo se congela, así que ese estado sería permanente. */
+.steps h3 {
+  font-size: 1.25rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--muted);
+  transition: color 380ms ease;
+}
+.steps p {
+  margin-top: 0.375rem;
+  color: var(--faint);
+  font-size: 0.9375rem;
+  transition: color 380ms ease;
+}
+.steps li[data-active="true"] h3 { color: var(--paper); }
+.steps li[data-active="true"] p { color: var(--muted); }
 
 .demo__note {
   margin-top: 1.75rem;
@@ -844,6 +860,9 @@ a { color: inherit; }
 @media (min-width: 760px) {
   .sizes { grid-template-columns: 1.2fr 1fr; align-items: stretch; }
   .sizes__item:first-child { grid-row: span 2; aspect-ratio: auto; }
+  /* Con align-items: stretch la altura la impone la fila y el
+     aspect-ratio recalculaba el ancho, desbordando la columna. */
+  .sizes__item:not(:first-child) { aspect-ratio: auto; height: 100%; }
 }
 .sizes__item {
   position: relative;
@@ -994,8 +1013,9 @@ a { color: inherit; }
 }
 @keyframes slide { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
-  .marquee__track { animation: none; flex-wrap: wrap; width: auto; }
-  .marquee { mask-image: none; -webkit-mask-image: none; }
+  /* Sin movimiento los dos grupos duplicados quedaban uno sobre otro y
+     cortados contra el borde. El párrafo de abajo dice lo mismo. */
+  .marquee { display: none; }
 }
 
 /* ============================================================

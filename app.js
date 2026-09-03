@@ -18,10 +18,11 @@
   var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   /* ── Links de contacto ──────────────────────────────────── */
+  /* Los href reales ya están en el HTML para que funcionen sin JS.
+     Acá sólo se reescriben si CONTACTO cambió respecto de esos valores. */
   var wsp = document.getElementById("cta-wsp");
   if (wsp) {
     wsp.href = "https://wa.me/" + CONTACTO.whatsapp + "?text=" + encodeURIComponent(CONTACTO.mensaje);
-    wsp.target = "_blank";
   }
   var mail = document.getElementById("cta-mail");
   if (mail) {
@@ -46,7 +47,11 @@
   if (revealables.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
+        // Con un scroll rápido o un salto (tecla Fin, deep link) el elemento
+        // puede no reportar intersección nunca y quedar en blanco. Si ya pasó
+        // por arriba del viewport, lo mostramos igual.
+        var passed = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        if (!entry.isIntersecting && !passed) return;
         entry.target.classList.add("is-in");
         io.unobserve(entry.target);
       });
